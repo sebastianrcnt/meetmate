@@ -1,24 +1,39 @@
-# README
+# MeetMate: 약속시간을 더 쉽게 잡아보자!
+### TODO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- [ ] DB
+  - [x] 데이터베이스 모델 만들기
+  - [ ] 데이터 검증 코드 작성하기
+  - [ ] 관계 설정하기
+  - [ ] 유저 모델 추가하기
+  - [ ] 유저 로그인 구현하기
+- [ ] 컨트롤러, 뷰
+  - [ ] 홈 페이지
+  - [ ] 새로운 약속 만들기 페이지
+  - [ ] 기존 약속 수정하기 페이지
+  - [ ] 가능한 시간 입력 페이지
+  - [ ] 가능한 시간 수정하기 페이지
+  - [ ] 통계 보여주기 페이지
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+### 공부할만한 자료
 
-* Configuration
+-  레일즈 가이드: https://rubykr.github.io/rails_guides/index.html
+  - 문서 읽기
+    - [x] 데이터베이스 마이그레이션
+    - [x] 데이터 검증(Validation, Callback)
+    - [x] 액티브 레코드 관계(Association)
+    - [x] 액티브 레코드 쿼리 인터페이스
+    - [ ] 레이아웃과 렌더링
+    - [ ] 액션 뷰 폼 헬퍼
+    - [ ] 액션 컨트롤러
+    - [x] 라우팅
 
-* Database creation
+- API 문서: https://api.rubyonrails.org/
+  - 읽을 필요는 없고 필요할 때 함수 찾아보기만 하면 됨
+  - 친절하고 세세하게 설명되어있음
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
++> 추가되는대로 업데이트하기
