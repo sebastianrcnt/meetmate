@@ -1,1 +1,0 @@
-Kakao.Auth.setAccessToken()
