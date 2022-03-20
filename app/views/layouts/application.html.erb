@@ -8,9 +8,13 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= yield :head_scripts %>
   </head>
 
   <body>
     <%= yield %>
+    <%= yield :body_scripts %>
+    <!-- controller/action.js auto import code -->
+    <%= javascript_pack_tag "#{controller_name}/#{action_name}.js" %>
   </body>
 </html>

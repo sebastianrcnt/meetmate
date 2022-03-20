@@ -83,6 +83,7 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    htmlbeautifier (1.4.1)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -103,7 +104,7 @@ GEM
     minitest (5.15.0)
     msgpack (1.4.5)
     nio4r (2.5.8)
-    nokogiri (1.13.3-arm64-darwin)
+    nokogiri (1.13.3-x86_64-darwin)
       racc (~> 1.4)
     public_suffix (4.0.6)
     puma (5.6.2)
@@ -203,11 +204,13 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  x86_64-darwin-20
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  htmlbeautifier
   jbuilder (~> 2.7)
   listen (~> 3.3)
   puma (~> 5.0)

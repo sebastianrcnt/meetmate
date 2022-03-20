@@ -12,6 +12,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@prettier/plugin-ruby": "^2.0.0",
+    "prettier": "^2.6.0",
+    "prettier-plugin-erb": "^0.4.0",
     "webpack-dev-server": "^3"
   }
 }
