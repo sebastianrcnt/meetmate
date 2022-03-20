@@ -13,7 +13,11 @@ class AuthController < ApplicationController
     @refresh_token = @data[:refresh_token]
 
     @user_info = ExternalApiModule::Kakao::get_user_info(@access_token)
-    @nickname = @user_info[:nickname]
-    @profile_image = @user_info[:profile_image]
+    @user_id = @user_info[:id] # 회원번호
+    @nickname = @user_info[:nickname] # 닉네임
+    @profile_image = @user_info[:profile_image] # 프로필 이미지
+  end
+
+  def kakao_signup
   end
 end
