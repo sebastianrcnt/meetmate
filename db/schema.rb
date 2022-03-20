@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_18_041510) do
+ActiveRecord::Schema.define(version: 2022_03_20_141150) do
 
   create_table "appointments", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2022_03_18_041510) do
     t.time "end_time"
     t.integer "appointment_id"
     t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "kakao_user_id"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.string "profile_image_url"
+    t.string "nickname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
