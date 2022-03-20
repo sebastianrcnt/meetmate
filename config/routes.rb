@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   get 'auth/kakao_login_code'
   get 'auth/kakao_info'
   get 'auth/kakao_signup_new'
-  post 'auth/kakak_signup_create'
+  post 'auth/kakao_signup_create'
+  get 'auth/logout'
 
   get 'auth/kakao_unlink'
+  get 'auth/show_session'
+  delete 'auth/destroy_user'
+
+  root to: "home#index"
 end
