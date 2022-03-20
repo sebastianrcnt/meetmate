@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   get 'auth/kakao_login'
   get 'auth/kakao_login_code'
   get 'auth/kakao_info'
+  get 'auth/kakao_signup_new'
+  post 'auth/kakak_signup_create'
+
+  get 'auth/kakao_unlink'
 end
