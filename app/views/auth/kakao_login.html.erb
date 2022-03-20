@@ -6,3 +6,7 @@
 <button id="kakao-login" type="button">
   kakao login
 </button>
+
+<%= content_for :body_scripts do %>
+  <%= javascript_pack_tag "auth/kakao_login.js" %>
+<% end %>

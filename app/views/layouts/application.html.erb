@@ -14,9 +14,5 @@
   <body>
     <%= yield %>
     <%= yield :body_scripts %>
-    <!-- controller/action.js auto import code -->
-    <% if File.exist?("#{controller_name}/#{action_name}.js") %>
-      <%= javascript_pack_tag "#{controller_name}/#{action_name}.js" %>
-    <% end %>
   </body>
 </html>
