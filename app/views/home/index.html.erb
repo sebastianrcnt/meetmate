@@ -1,18 +1,20 @@
-<section class="my-10 border">
-    <ol>
-        <li><a href="/auth/kakao_login">카카오 로그인 시작</a></li>
-        <li><a href="/auth/logout">로그아웃하기</a></li>
-        <li>
-            <% if is_logged_in %>
+<section class="my-10 border p-4">
+    <ol class="flex flex-row space-x-2">
+        <li><a href="/auth/kakao_login"><button class="pure-button button-secondary">카카오 로그인 시작</button></a></li>
+        <% if is_logged_in %>
+            <li><a href="/auth/logout"><button class="pure-button button-warning">로그아웃하기</button></a></li>
+            <li>    
                 <%= form_with url: '/auth/destroy_user', method: :delete do |f|%>
                     <%= f.text_field :id, type: :hidden, value: @user_info["id"] %>
-                    <%= f.submit  "유저 삭제", class: "button" %>
+                    <%= f.submit  "유저 삭제", class: "button pure-button button-error" %>
                 <% end %>
-            <% end %>
-        </li>
-        <li>is logged in : <%= is_logged_in %></li>
-        <li>current user: <%= @user_info %> </li>
+            </li>
+        <% end %>
     </ol>
+    <ul>
+        <li>로그인 여부 : <%= is_logged_in ? "예" : "아니오" %></li>
+        <li>current user: <%= @user_info %> </li>
+    </ul>
 </section>
 
 <table class="border pure-table">
