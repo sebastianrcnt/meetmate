@@ -1,5 +1,3 @@
-require "modules/auth_module.rb"
-
 class HomeController < ApplicationController
     include ApplicationHelper
     def index

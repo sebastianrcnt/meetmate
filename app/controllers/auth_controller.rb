@@ -1,5 +1,3 @@
-require_relative "../api/kakao.rb"
-
 class AuthController < ApplicationController
   def kakao_login; end
 
