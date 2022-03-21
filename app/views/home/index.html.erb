@@ -1,12 +1,36 @@
-<ul>
-    <li><a href="/auth/kakao_login">카카오 로그인 시작</a></li>
-    <li><a href="/auth/logout">로그아웃하기</a></li>
-    <% if is_logged_in %>
-        <%= form_with url: '/auth/destroy_user', method: :delete do |f|%>
-            <%= f.text_field :id, type: :hidden, value: @user_info["id"] %>
-            <%= f.submit "유저 삭제" %>
+<section class="my-10 border">
+    <ol>
+        <li><a href="/auth/kakao_login">카카오 로그인 시작</a></li>
+        <li><a href="/auth/logout">로그아웃하기</a></li>
+        <li>
+            <% if is_logged_in %>
+                <%= form_with url: '/auth/destroy_user', method: :delete do |f|%>
+                    <%= f.text_field :id, type: :hidden, value: @user_info["id"] %>
+                    <%= f.submit  "유저 삭제", class: "button" %>
+                <% end %>
+            <% end %>
+        </li>
+        <li>is logged in : <%= is_logged_in %></li>
+        <li>current user: <%= @user_info %> </li>
+    </ol>
+</section>
+
+<table class="border pure-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nickname</th>
+            <th>Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% User.all.each do | user | %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.nickname %></td>
+                <td>
+                    <img src="<%= user.profile_image_url %>" class="w-4 h-4 rounded-full"></td>
+            </tr>
         <% end %>
-    <% end %>
-    <li>is logged in : <%= is_logged_in %></li>
-    <li>current user: <%= @user_info %> </li>
-</ul>
+    </tbody>
+</table>

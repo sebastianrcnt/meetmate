@@ -3,11 +3,15 @@
     <h3 class="text-xl font-bold">회원가입하기</h3>
     <img src="<%= @profile_image_url %>" alt="" class="rounded-full object-cover" style="width: 100px; height: 100px;">
     <h3 class="text-2xl"><%= @nickname %></h3>
-</div>
 
-<%= form_with scope: :user, url: "/auth/kakao_signup_create", class: "flex flex-col items-center", method: :post do | form | %>
+<%= form_with scope: :user, url: "/auth/kakao_signup_create", class: "pure-form pure-form-stacked", method: :post do | form | %>
+<fieldset>
+
     <%= form.label :kakao_user_id, "user_id" %>
     <%= form.text_field :kakao_user_id, value: @user_id %>
+
+    <%= form.label :nickname, "nickname" %>
+    <%= form.text_field :nickname, value: @nickname %>
 
     <%= form.label :access_token, "access_token" %>
     <%= form.text_field :access_token, value: @access_token %>
@@ -18,7 +22,7 @@
     <%= form.label :profile_image_url, "profile_image_url" %>
     <%= form.text_field :profile_image_url, value: @profile_image_url %>
 
-    <%= form.submit "signup", class: "text-lg border rounded p-2 border-black" %>
+    <%= form.submit "signup", class: "pure-button button-large" %>
+</fieldset>
 <% end %>
-
-<a href="/auth/kakao_unlink?access_token=<%= @access_token %>">unlink</a>
+</div>

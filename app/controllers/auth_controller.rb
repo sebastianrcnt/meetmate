@@ -1,14 +1,15 @@
 class AuthController < ApplicationController
+  include Kakao
   def kakao_login; end
 
   def kakao_login_code
     @auth_code = params[:code]
-    @data = ExternalApiModule::Kakao::request_token(@auth_code)
+    @data = Kakao::request_token(@auth_code)
     @auth_code = @data["code"]
     @access_token = @data["access_token"]
     @refresh_token = @data["refresh_token"]
 
-    @user_info = ExternalApiModule::Kakao::get_user_info(@access_token)
+    @user_info = Kakao::get_user_info(@access_token)
 
     @user_id = @user_info["id"] # 회원번호
     @profile_image = @user_info[:profile_image] # 프로필 이미지
@@ -41,7 +42,7 @@ class AuthController < ApplicationController
   end
 
   def kakao_signup_create
-    person_params = params.require(:user).permit(:kakao_user_id, :access_token, :refresh_token, :profile_image_url)
+    person_params = params.require(:user).permit(:kakao_user_id, :access_token, :refresh_token, :profile_image_url, :nickname)
     user = User.new(person_params)
     user.save
     session[:current_user_id] = user.id
@@ -50,7 +51,7 @@ class AuthController < ApplicationController
 
   def kakao_unlink
     @access_token = params[:access_token]
-    result = ExternalApiModule::Kakao.unlink(@access_token)
+    result = Kakao.unlink(@access_token)
     render json: result
   end
 
