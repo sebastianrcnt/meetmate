@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   # dev
   get 'dev/users'  
   get 'dev/destroy_user'
+  get 'dev/login_user'
+  get 'dev/logout_user'
 
   root to: "home#index"
   get "landing", to: "home#landing"

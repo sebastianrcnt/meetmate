@@ -17,7 +17,10 @@
         <%= flash[:notice] %>
       </div>
     <% end %>
-    <%= yield %>
+    <div class="p-4">
+
+      <%= yield %>
+    </div>
     <%= yield :body_scripts %>
   </body>
 </html>
