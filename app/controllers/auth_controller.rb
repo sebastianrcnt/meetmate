@@ -4,7 +4,8 @@ class AuthController < ApplicationController
 
   def kakao_login_code
     @auth_code = params[:code]
-    @data = Kakao::request_token(@auth_code)
+    @browser_hostname = params[:browser_hostname]
+    @data = Kakao::request_token(@auth_code, "http://192.168.0.34:3000/auth/kakao_login_code")
     @auth_code = @data["code"]
     @access_token = @data["access_token"]
     @refresh_token = @data["refresh_token"]

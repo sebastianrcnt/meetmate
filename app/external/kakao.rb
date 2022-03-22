@@ -2,14 +2,14 @@ require 'http'
 require 'json'
 
 module Kakao
-    def self.request_token(auth_code)
+    def self.request_token(auth_code, redirect_uri)
         @response =
             HTTP.post(
                 'https://kauth.kakao.com/oauth/token',
                 form: {
                     grant_type: 'authorization_code',
                     client_id: '1cf6615d2a113504c5661c5e415fe2e7',
-                    redirect_uri: 'http://localhost:3000/auth/kakao_login_code',
+                    redirect_uri: redirect_uri,
                     code: auth_code
                 }
             )
