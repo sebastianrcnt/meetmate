@@ -1,0 +1,30 @@
+<table class="table-auto border-collapse w-full text-sm">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nickname</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.nickname %></td>
+                <td>
+                    <% if session[:current_user_id] == user.id %>
+                        <button class="border p-1">Logout</button>
+                    <% else %>
+                        <button class="border p-1">Login</button>
+                    <% end %>
+                    <a class="border p-1" href="/dev/destroy_user?id=<%= user.id %>">Destroy</a>
+                </td>
+            </tr>
+        <% end %>        
+    </tbody>
+</table>
+<style>
+    table * {
+        text-align: center;
+    }
+</style>
