@@ -34,3 +34,7 @@
     box-sizing: border-box;
     font-family: Pretendard, serif;
 }
+
+li {
+    list-style: none;
+}

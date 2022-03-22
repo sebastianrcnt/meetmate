@@ -6,9 +6,10 @@ class HomeController < ApplicationController
             redirect_to start_path
         end
 
-        @user_info = get_user_info
+        redirect_to action: :my
     end
 
+    def my; end
     def landing; end
     def start; end
 end

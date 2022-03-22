@@ -1,0 +1,19 @@
+<nav class="flex flex-row space-x-4" id="nav">
+    <li class="active">내가 만든</li>
+    <li class="">참여 중인</li>
+</nav>
+<style>
+    nav li {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgba(0,0,0,0.25);
+    }
+
+    nav li.active {
+        color: rgba(0,0,0,0.75);
+    }
+</style>
+<script>
+    const nav = document.getElementById('nav')
+    const navElements = document.querySelectorAll("#nav > li")
+</script>
