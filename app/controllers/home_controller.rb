@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     def index
         @user_info = get_user_info
     end
-    
-    def landing
-    end
+
+    def landing; end
+    def start; end
 end

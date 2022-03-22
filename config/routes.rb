@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get "landing", to: "home#landing"
+  get "start", to: "home#start"
 end
