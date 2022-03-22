@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   delete 'auth/destroy_user'
 
   root to: "home#index"
+  get "landing", to: "home#landing"
 end
