@@ -20,5 +20,10 @@
   <%= @appointment.end_hour %>
 </p>
 
+<p>
+  <strong>Owner:</strong>
+  <%= @appointment.owner %>
+</p>
+
 <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
 <%= link_to 'Back', appointments_path %>

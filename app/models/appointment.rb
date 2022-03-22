@@ -23,6 +23,7 @@ class Appointment < ApplicationRecord
     include ActiveModel::Validations
     # has_many :availabilities
     has_many :availabilities, class_name: "Availability", inverse_of: :appointment
+    belongs_to :owner, class_name: "User", foreign_key: "owner_id"
     validates_presence_of :start_hour, message: "시작 시간은 필수입니다"
     validates_presence_of :end_hour, message: "종료 시간은 필수입니다."
     validates_with AppointmentHourRangeValidator
