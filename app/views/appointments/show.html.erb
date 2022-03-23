@@ -19,49 +19,66 @@
     </div>
   </section>
   <%# Start Selector %>
-  <section>
-    <% @dates_hash.each do | keyval |%>
+  <button>Prev</button>
+  <button>Next</button>
+  <% @dates_hash.each do | keyval |%>
+    <section class="">
       <% yearmonth, date_groups = keyval %>
       <% date_groups.each_with_index do |date_group, date_group_index| %>
         <% section_year, section_month = yearmonth.split(',') %>
-        <div><%= section_year %>년 <%= section_month %>월</div>
-        <%= date_group_index %>/<%= date_group %>/<%= date_group.length %>
-        <div class="flex flex-row availability-matrix hidden">
-          <% @sorted_dates.each do |date| %>
-            <div class="appointment-date flex flex-col">
-              <div class="appointment-date-header flex flex-col align-center justify-center">
-                <div class="day flex align-center justify-center text-xs font-light"><%= date.korean_yoeil %>요일</div>
-                <div class="date flex align-center justify-center text-2xl"><%= date.strftime("%d") %></div>
+        <div class="text-xl mt-10 font-bold"><%= section_year %>년 <%= section_month %>월</div>
+        <div class="flex flex-row availability-matrix">
+          <div class="hour-indicator-column flex flex-col flex-1">
+            <div class="hour-indicator-column-header flex flex-col items-center justify-center text-gray-600">TIME</div>
+            <% (@appointment.start_hour..@appointment.end_hour).each do |hour|%>
+              <div class="hour-indicator-slot flex flex-col items-center justify-start font-light text-xs text-gray-600">
+                <% if hour > 12 %>
+                  <%= hour % 12 %> PM
+                <% else %>
+                  <%= hour %> AM
+                <% end %>
               </div>
-              <% (@appointment.start_hour..@appointment.end_hour).each do |hour| %>
-                <div class="hour-slot">
-                  <div class="half-hour-slot selectable-nodes">
-                    <%= "%02d" % hour %>:00 - <%= "%02d" % hour %>:30
-                  </div>
-                  <div class="half-hour-slot selectable-nodes">
-                    <%= "%02d" % hour %>:30 - <%= "%02d" % (hour+1) %>:00
-                  </div>
+            <% end %>
+          </div>
+          <div class="selectable-area flex flex-row flex-1">
+            <% date_group.each do |date| %>
+              <div class="appointment-date-column flex flex-col flex-1">
+                <div class="appointment-date-column-header flex flex-col align-center justify-center">
+                  <div class="day flex align-center justify-center text-xs font-light"><%= date.korean_yoeil %>요일</div>
+                  <div class="date flex align-center justify-center text-2xl"><%= date.strftime("%d") %></div>
                 </div>
-              <% end %>
-            </div>
-          <% end %>
+                <% (@appointment.start_hour..@appointment.end_hour).each do |hour| %>
+                  <div class="hour-slot">
+                    <div class="half-hour-slot selectable-nodes">
+                      <div class="hidden">
+                        <%= "%02d" % hour %>:00 - <%= "%02d" % hour %>:30
+                      </div>
+                    </div>
+                    <div class="half-hour-slot selectable-nodes">
+                      <div class="hidden">
+                        <%# <%= "%02d" % hour %>:30 - <%= "%02d" % (hour+1) %>:00 %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       <% end %>
-    <% end %>
-  </section>
+    </section>
+  <% end %>
 </div>
 <script>
-  var pressTimer;
-  $(".selectable-nodes").mouseup(function() {
-      console.log("mouseup!")
-    clearTimeout(pressTimer);
-    return false;
-  }).mousedown(function() {
-    pressTimer = window.setTimeout(() => {
-      console.log("mousedown!")
-    }, 400);
-    return false;
-  })
+  const selectableAreaElements = Array.from(document.querySelectorAll('.selectable-area'))
+  for (let selectableAreaElement of selectableAreaElements) {
+    new DragSelect({
+     selectables: document.getElementsByClassName('selectable-nodes'),
+     area: selectableAreaElement,
+     draggability: false,
+     multiSelectMode: true,
+    });
+  }
 </script>
 <style>
   .selectable-nodes {
@@ -75,10 +92,21 @@
       color: rgba(0,0,0,1);
       font-weight: bold;
     }
-    .availability-matrix {
-      overflow-x: scroll;
-      padding: 20px 0;
+
+    .hour-indicator-column {
+      min-width: 40px;
+      max-width: 40px;
+      margin-right: 10px;
     }
+
+    .hour-indicator-column-header {
+      height: 60px;
+    }
+
+    .hour-indicator-slot {
+      height: 50px;
+    }
+
 
     .availability-matrix * {
       user-select:none;
@@ -87,12 +115,13 @@
       -ms-user-select: none;
     }
 
-    .appointment-date {
-      min-width: 25vw;
+    .appointment-date-column {
     }
-    .appointment-date-header {
+
+    .appointment-date-column-header {
       height: 60px;
     }
+
     .hour-slot {
       height: 50px;
 
@@ -101,13 +130,18 @@
       align-items:stretch;
 
       border-top: 0.5px solid #ccc;
+      border-right: 0.5px solid #ccc;
 
       width: 100%;
     }
 
-    .appointment-date:not(:last-child) .hour-slot {
-      border-right: 0.5px solid #ccc;
+    .appointment-date-column:first-child .hour-slot {
+      border-left: 0.5px solid #ccc;
     }
+    .hour-slot:last-child {
+      border-bottom: 0.5px solid #ccc;
+    }
+
     .half-hour-slot {
       height: 25px;
       width: 100%;
@@ -119,9 +153,16 @@
       border-collapse: collapse;
     }
 
+    .ds-selected {
+      background-color: #6BCB77;
+    }
+
+    .half-hour-slot:first-child {
+      border-bottom: 0.5px dotted #ccc;
+    }
+
     .selection-container {
       width: 100%;
-      /* height: 300px; */
       overflow: scroll;
     }
 </style>

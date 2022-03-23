@@ -13,7 +13,7 @@ class AppointmentsController < ApplicationController
     def show
         @dates = @appointment.appointment_dates.map { |ad| ad.date }
         @sorted_dates = sort_by_date(@dates, direction = 'ASC')
-        @dates_hash = DatePaginationGroup.new(@dates).get_hash
+        @dates_hash = DatePaginationGroup.new(@dates, 6).get_hash
         # @sorted_date_groups = {}
         # @sorted_dates.each do |date|
         #     date_group_key = "#{date.year},#{date.month}"

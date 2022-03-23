@@ -9,10 +9,11 @@ def sort_by_date(dates, direction = 'ASC')
 end
 
 class DatePaginationGroup
-    attr_accessor :dates
+    attr_accessor :dates, :page_size
 
-    def initialize(dates = [])
+    def initialize(dates = [], page_size = 7)
         @dates = dates
+        @page_size = page_size
         sort
     end
 
@@ -38,7 +39,7 @@ class DatePaginationGroup
             if hash[ymp].length == 0
                 hash[ymp] = [[date]]
             else
-                if hash[ymp].last.length < 7
+                if hash[ymp].last.length < @page_size
                     hash[ymp].last << date
                 else
                     hash[ymp] << [date]
@@ -63,35 +64,35 @@ class DatePaginationGroup
     end
 end
 
-dates = [
-    Date.new(2022, 1, 1),
-    Date.new(2022, 1, 3),
-    Date.new(2022, 1, 4),
-    Date.new(2022, 1, 5),
-    Date.new(2022, 1, 7),
-    Date.new(2022, 1, 9),
-    Date.new(2022, 1, 11),
-    Date.new(2022, 1, 13),
-    Date.new(2023, 1, 13),
-    Date.new(2023, 5, 1),
-    Date.new(2023, 5, 2),
-    Date.new(2023, 5, 3),
-    Date.new(2023, 5, 4),
-    Date.new(2023, 5, 5),
-    Date.new(2023, 5, 6),
-    Date.new(2023, 5, 7),
-    Date.new(2023, 5, 8),
-    Date.new(2023, 5, 9),
-    Date.new(2023, 6, 1),
-    Date.new(2023, 6, 2),
-    Date.new(2023, 6, 3),
-    Date.new(2023, 7, 1),
-    Date.new(2024, 1, 13),
-    Date.new(2025, 1, 13)
-]
+# dates = [
+#     Date.new(2022, 1, 1),
+#     Date.new(2022, 1, 3),
+#     Date.new(2022, 1, 4),
+#     Date.new(2022, 1, 5),
+#     Date.new(2022, 1, 7),
+#     Date.new(2022, 1, 9),
+#     Date.new(2022, 1, 11),
+#     Date.new(2022, 1, 13),
+#     Date.new(2023, 1, 13),
+#     Date.new(2023, 5, 1),
+#     Date.new(2023, 5, 2),
+#     Date.new(2023, 5, 3),
+#     Date.new(2023, 5, 4),
+#     Date.new(2023, 5, 5),
+#     Date.new(2023, 5, 6),
+#     Date.new(2023, 5, 7),
+#     Date.new(2023, 5, 8),
+#     Date.new(2023, 5, 9),
+#     Date.new(2023, 6, 1),
+#     Date.new(2023, 6, 2),
+#     Date.new(2023, 6, 3),
+#     Date.new(2023, 7, 1),
+#     Date.new(2024, 1, 13),
+#     Date.new(2025, 1, 13)
+# ]
 
-dpg = DatePaginationGroup.new(dates)
-dpg.add_date(Date.new(2000, 1, 1))
-puts dpg.dates
-puts dpg.get_year_month_pairs
-puts dpg.get_hash.to_json
+# dpg = DatePaginationGroup.new(dates)
+# dpg.add_date(Date.new(2000, 1, 1))
+# puts dpg.dates
+# puts dpg.get_year_month_pairs
+# puts dpg.get_hash.to_json
