@@ -2,9 +2,7 @@
     "files.associations": {
         "*.html.erb": "erb"
     },
-    "cSpell.words": [
-        "Kakao"
-    ],
+    "cSpell.words": ["Kakao"],
     "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
     "editor.fontFamily": "\"Dank Mono\", Menlo, Monaco, 'Courier New', monospace",
     "[ruby]": {
@@ -13,5 +11,8 @@
     "[erb]": {
         "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "emmet.includeLanguages": {
+        "erb": "html"
+    }
 }

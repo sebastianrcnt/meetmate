@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
     def get_participating_appointments
         return(
-            Appointment.all do |appointment|
+            Appointment.all.select do |appointment|
                 appointment.get_participants_set.include? self
             end
         )
