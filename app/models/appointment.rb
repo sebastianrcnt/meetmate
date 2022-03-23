@@ -1,3 +1,4 @@
+require 'set'
 # time range validations
 # https://api.rubyonrails.org/classes/ActiveModel/Validator.html
 class AppointmentHourRangeValidator < ActiveModel::Validator
@@ -21,11 +22,28 @@ end
 
 class Appointment < ApplicationRecord
     include ActiveModel::Validations
-    # has_many :availabilities
+    has_many :appointment_dates
     has_many :availabilities, class_name: "Availability", inverse_of: :appointment
     belongs_to :owner, class_name: "User", foreign_key: "owner_id"
     validates_presence_of :start_hour, message: "시작 시간은 필수입니다"
     validates_presence_of :end_hour, message: "종료 시간은 필수입니다."
     validates_with AppointmentHourRangeValidator
+
+    def get_participants
+        participants_set = get_participants_set
+        return participants_set.to_a
+    end
+
+    def get_participants_set
+        set = Set.new
+
+        self.availabilities.each do | availability | 
+            if not set.include? availability.user
+                set.add availability.user
+            end
+        end
+
+        return set
+    end
 end
 

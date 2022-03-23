@@ -8,7 +8,7 @@ end
 
 class Availability < ApplicationRecord
     belongs_to :appointment, class_name: "Appointment", foreign_key: :appointment_id
-
+    belongs_to :user, class_name: "User", foreign_key: :user_id
     validates_presence_of :start_time, :end_time, :appointment_id, :user_id
     validates_with AvailabilityTimeRangeValidator
 end

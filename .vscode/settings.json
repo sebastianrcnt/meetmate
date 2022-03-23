@@ -1,10 +1,16 @@
 {
     "files.associations": {
-        "*.html.erb": "html"
+        "*.html.erb": "erb"
     },
     "cSpell.words": [
         "Kakao"
     ],
     "editor.defaultFormatter": "Glavin001.unibeautify-vscode",
-    "editor.fontFamily": "\"Dank Mono\", Menlo, Monaco, 'Courier New', monospace"
+    "editor.fontFamily": "\"Dank Mono\", Menlo, Monaco, 'Courier New', monospace",
+    "[ruby]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[erb]": {
+        "editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+    }
 }

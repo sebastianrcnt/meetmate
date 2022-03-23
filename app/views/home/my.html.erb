@@ -1,69 +1,77 @@
 <div class="container p-8">
-    <%= render "nav" %>
-        <ul class="mt-6 flex flex-col space-y-4">
-            <li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
-                <div class="mb-2 text-xl font-semibold">CEOS OT</div>
-                <div class="flex flex-row participants-wrapper items-center">
-                    <div class="avatar-collection mr-2">
-                        <span class="avatar">
-                            <img src="https://picsum.photos/seed/ho/24/24" alt="">
-                        </span>
-                        <span class="avatar">
-                            <img src="https://picsum.photos/seed/ly/24/24" alt="">
-                        </span>
-                        <span class="avatar">
-                            <img src="https://picsum.photos/seed/fu/24/24" alt="">
-                        </span>
-                    </div>
-                    <div class="text-gray-400">
-                        정쿨, 유쿨 님 외 8명 참여중
-                    </div>
-                </div>
-
-            </li>
-        </ul>
+  <ul class="mt-6 flex flex-col space-y-4">
+    <% @my_appointments.each do | appointment | %>
+      <li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
+        <% participants = appointment.get_participants %>
+        <% participant_names = participants.map { |participant| participant.nickname }.join(", ") %>
+        <div class="mb-2 text-xl font-semibold"><%= appointment.name %></div>
+        <div class="flex flex-row participants-wrapper items-center">
+          <div class="avatar-collection mr-2">
+            <% participants.take(3).each do | participant | %>
+              <span class="avatar">
+                <img src="<%= participant.profile_image_url %>" alt="">
+              </span>
+            <% end %>
+          </div>
+          <div class="text-gray-400">
+            <%= participant_names %>
+            님 포함
+            <%= participants.length %>명 참여중
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <section>
+    <ul class="flex flex-col space-y-4">
+      <% @participating_appointments.each do | appointment | %>
+        <li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
+          <% participants = appointment.get_participants %>
+          <% participant_names = participants.map { |participant| participant.nickname }.join(", ") %>
+          <div class="mb-2 text-xl font-semibold"><%= appointment.name %></div>
+          <div class="flex flex-row participants-wrapper items-center">
+            <div class="avatar-collection mr-2">
+              <% participants.take(3).each do | participant | %>
+                <span class="avatar">
+                  <img src="<%= participant.profile_image_url %>" alt="">
+                </span>
+              <% end %>
+            </div>
+            <div class="text-gray-400">
+              <%= participant_names %>
+              님 포함
+              <%= participants.length %>명 참여중
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </section>
 </div>
-
 <style>
-    .avatar-collection {
-        display: flex;
-        flex-direction: row;
+  .avatar-collection {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
 
-        /* width: calc(24px + (9px * 3)); */
-        overflow-x: hidden;
-    }
+  .avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+  }
 
-    .avatar {
-        display: inline-block;
-        border-radius: 50%;
-        overflow: hidden;
-        width: 24px;
-    }
-
-    .avatar:not(:first-child) {
+  .avatar:not(:first-child) {
     margin-left: -5px;
-    /* -webkit-mask:radial-gradient(circle 12px at 5px 50%,transparent 99%,#fff 100%);
-            mask:radial-gradient(circle 12px at 5px 50%,transparent 99%,#fff 100%); */
-    }
+  }
 
-    .avatar img {
+  .avatar img {
     width: 100%;
     display: block;
-    }
-/* 
-    .avatar-collection img {
-        width: 24px;
-        height: 24px;
-        border-radius: 24px;
-    }
-
-    .avatar-collection img:nth-child(2) {
-        position:relative;
-        right: 8px;
-    }
-
-    .avatar-collection img:nth-child(3) {
-        position:relative;
-        right: 16px;
-    } */
+  }
 </style>
