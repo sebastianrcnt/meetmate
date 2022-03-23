@@ -1,29 +1,23 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @appointment.name %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= @appointment.description %>
 </p>
-
 <p>
   <strong>Start hour:</strong>
   <%= @appointment.start_hour %>
 </p>
-
 <p>
   <strong>End hour:</strong>
   <%= @appointment.end_hour %>
 </p>
-
 <p>
   <strong>Owner:</strong>
   <%= @appointment.owner %>
 </p>
-
 <%= link_to 'Edit', edit_appointment_path(@appointment) %> |
 <%= link_to 'Back', appointments_path %>

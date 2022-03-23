@@ -10,14 +10,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= yield :head_scripts %>
   </head>
-
   <body>
     <% if flash[:notice] %>
       <div class="notice">
         <%= flash[:notice] %>
       </div>
     <% end %>
-      <%= yield %>
+    <%= yield %>
     <%= yield :body_scripts %>
   </body>
 </html>

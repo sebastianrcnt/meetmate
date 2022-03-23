@@ -1,24 +1,19 @@
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Start time:</strong>
   <%= @availability.start_time %>
 </p>
-
 <p>
   <strong>End time:</strong>
   <%= @availability.end_time %>
 </p>
-
 <p>
   <strong>Appointment:</strong>
   <%= @availability.appointment_id %>
 </p>
-
 <p>
   <strong>User:</strong>
   <%= @availability.user_id %>
 </p>
-
 <%= link_to 'Edit', edit_availability_path(@availability) %> |
 <%= link_to 'Back', availabilities_path %>

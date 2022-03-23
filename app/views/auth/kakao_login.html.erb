@@ -1,12 +1,9 @@
 <%= content_for :head_scripts do %>
   <%= javascript_include_tag "https://developers.kakao.com/sdk/js/kakao.js" %>
 <% end %>
-
-
 <button id="kakao-login" type="button">
   kakao login
 </button>
-
 <%= content_for :body_scripts do %>
   <%= javascript_pack_tag "auth/kakao_login.js" %>
 <% end %>

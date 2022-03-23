@@ -1,36 +1,36 @@
 <table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nickname</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @users.each do |user| %>
-            <tr style="line-height: 40px;">
-                <td><%= user.id %></td>
-                <td><%= user.nickname %></td>
-                <td>
-                    <% if session[:current_user_id].to_s == user.id.to_s %>
-                        <a class="border p-1" href="/dev/logout_user?id=<%= user.id %>">Logout</a>
-                    <% else %>
-                        <a class="border p-1" href="/dev/login_user?id=<%= user.id %>">Login</a>
-                    <% end %>
-                    <a class="border p-1" href="/dev/destroy_user?id=<%= user.id %>">Destroy</a>
-                </td>
-            </tr>
-        <% end %>        
-    </tbody>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nickname</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr style="line-height: 40px;">
+        <td><%= user.id %></td>
+        <td><%= user.nickname %></td>
+        <td>
+          <% if session[:current_user_id].to_s == user.id.to_s %>
+            <a class="border p-1" href="/dev/logout_user?id=<%= user.id %>">Logout</a>
+          <% else %>
+            <a class="border p-1" href="/dev/login_user?id=<%= user.id %>">Login</a>
+          <% end %>
+          <a class="border p-1" href="/dev/destroy_user?id=<%= user.id %>">Destroy</a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <div>
-    current_user_id: <%= session[:current_user_id] %>
+  current_user_id: <%= session[:current_user_id] %>
 </div>
 <div>
-    is_logged_in: <%= is_logged_in %>
+  is_logged_in: <%= is_logged_in %>
 </div>
 <style>
-    table * {
-        text-align: center;
-    }
+  table * {
+      text-align: center;
+  }
 </style>

@@ -3,27 +3,22 @@
     <strong class="block font-medium mb-1">Kakao user:</strong>
     <%= user.kakao_user_id %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Access token:</strong>
     <%= user.access_token %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Refresh token:</strong>
     <%= user.refresh_token %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Profile image url:</strong>
     <%= user.profile_image_url %>
   </p>
-
   <p class="my-5">
     <strong class="block font-medium mb-1">Nickname:</strong>
     <%= user.nickname %>
   </p>
-
   <% if action_name != "show" %>
     <%= link_to "Show this user", user, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this user', edit_user_path(user), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
