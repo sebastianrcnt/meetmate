@@ -1,49 +1,17 @@
-<div class="container p-8">
-  <ul class="mt-6 flex flex-col space-y-4">
-    <% @my_appointments.each do | appointment | %>
-      <li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
-        <% participants = appointment.get_participants %>
-        <% participant_names = participants.map { |participant| participant.nickname }.join(", ") %>
-        <div class="mb-2 text-xl font-semibold"><%= appointment.name %></div>
-        <div class="flex flex-row participants-wrapper items-center">
-          <div class="avatar-collection mr-2">
-            <% participants.take(3).each do | participant | %>
-              <span class="avatar">
-                <img src="<%= participant.profile_image_url %>" alt="">
-              </span>
-            <% end %>
-          </div>
-          <div class="text-gray-400">
-            <%= participant_names %>
-            님 포함
-            <%= participants.length %>명 참여중
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
+<div class="container p-8 space-y-4">
   <section>
+    <h1 class="mb-4 text-xl font-semibold text-gray-700">나의 약속</h1>
+    <ul class="flex flex-col">
+      <% @my_appointments.each do | appointment | %>
+        <%= render partial: "appointment_card", locals: { appointment: appointment } %>
+      <% end %>
+    </ul>
+  </section>
+  <section>
+    <h1 class="mb-4 text-xl font-semibold text-gray-700">참여중인 약속</h1>
     <ul class="flex flex-col space-y-4">
       <% @participating_appointments.each do | appointment | %>
-        <li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
-          <% participants = appointment.get_participants %>
-          <% participant_names = participants.map { |participant| participant.nickname }.join(", ") %>
-          <div class="mb-2 text-xl font-semibold"><%= appointment.name %></div>
-          <div class="flex flex-row participants-wrapper items-center">
-            <div class="avatar-collection mr-2">
-              <% participants.take(3).each do | participant | %>
-                <span class="avatar">
-                  <img src="<%= participant.profile_image_url %>" alt="">
-                </span>
-              <% end %>
-            </div>
-            <div class="text-gray-400">
-              <%= participant_names %>
-              님 포함
-              <%= participants.length %>명 참여중
-            </div>
-          </div>
-        </li>
+        <%= render partial: "appointment_card", locals: { appointment: appointment } %>
       <% end %>
     </ul>
   </section>

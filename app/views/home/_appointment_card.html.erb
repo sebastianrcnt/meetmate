@@ -1,0 +1,27 @@
+<li class="border flex flex-col align-start justify-stretch p-4 rounded-md">
+  <% participants = appointment.get_participants %>
+  <% participant_names = participants.map { |participant| participant.nickname }.join(", ") %>
+  <div class="text-lg font-semibold"><%= appointment.name %></div>
+  <div class="flex flex-row participants-wrapper items-center">
+    <div class="avatar-collection mr-2">
+      <% participants.take(3).each do | participant | %>
+        <span class="avatar">
+          <img src="<%= participant.profile_image_url %>" alt="">
+        </span>
+      <% end %>
+    </div>
+    <div class="text-gray-400 text-sm">
+      <% if participants.length > 1 %>
+        <%= participant_names %>
+        님 포함
+        <%= participants.length %>명 참여중
+      <% elsif participants.length == 1 %>
+        <%= participant_names %>
+        님 참여중
+      <% else %>
+        <%= participant_names %>
+        <%= participants.length %>명 참여중
+      <% end %>
+    </div>
+  </div>
+</li>
