@@ -15,7 +15,8 @@ class HomeController < ApplicationController
         else
             current_user = get_current_user
             @my_appointments = current_user.get_my_appointments
-            @participating_appointments = current_user.get_participating_appointments
+            @participating_appointments =
+                current_user.get_participating_appointments
         end
     end
 

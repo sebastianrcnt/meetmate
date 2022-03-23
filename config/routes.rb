@@ -1,30 +1,32 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :users
-  resources :availabilities
-  resources :appointments
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+    mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+    resources :users
+    resources :availabilities
+    resources :appointments
 
-  # auth controller
-  get 'auth/kakao_login'
-  get 'auth/kakao_login_code'
-  get 'auth/kakao_info'
-  get 'auth/kakao_signup_new'
-  post 'auth/kakao_signup_create'
-  get 'auth/logout'
+    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  get 'auth/kakao_unlink'
-  # get 'auth/show_session'
-  delete 'auth/destroy_user'
+    # auth controller
+    get 'auth/kakao_login'
+    get 'auth/kakao_login_code'
+    get 'auth/kakao_info'
+    get 'auth/kakao_signup_new'
+    post 'auth/kakao_signup_create'
+    get 'auth/logout'
 
-  # dev
-  get 'dev/users'  
-  get 'dev/destroy_user'
-  get 'dev/login_user'
-  get 'dev/logout_user'
+    get 'auth/kakao_unlink'
 
-  root to: "home#index"
-  get "landing", to: "home#landing"
-  get "start", to: "home#start"
-  get "my", to: "home#my"
+    # get 'auth/show_session'
+    delete 'auth/destroy_user'
+
+    # dev
+    get 'dev/users'
+    get 'dev/destroy_user'
+    get 'dev/login_user'
+    get 'dev/logout_user'
+
+    root to: 'home#index'
+    get 'landing', to: 'home#landing'
+    get 'start', to: 'home#start'
+    get 'my', to: 'home#my'
 end

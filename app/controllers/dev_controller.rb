@@ -5,9 +5,7 @@ class DevController < ApplicationController
 
     def destroy_user
         @user = User.find_by_id(params[:id])
-        if @user
-            @user.destroy
-        end
+        @user.destroy if @user
         redirect_to action: :users
     end
 

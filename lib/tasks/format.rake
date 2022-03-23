@@ -8,5 +8,5 @@ task :format_views do
 end
 
 task :format_source do
-    exec("yarn prettier ./app/**/*.rb --write")
+    exec("yarn prettier ./**/*.rb --write")
 end

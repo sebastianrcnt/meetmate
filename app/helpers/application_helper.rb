@@ -4,7 +4,7 @@ module ApplicationHelper
         if current_user_id
             found = User.find_by_id(current_user_id)
             if found
-                return  current_user_id ? true : false
+                return current_user_id ? true : false
             else
                 return false
             end
