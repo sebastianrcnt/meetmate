@@ -35,4 +35,19 @@ module ApplicationHelper
     def get_current_user_id
         return session[:current_user_id]
     end
+
+    def sort_by_date(dates, direction = 'ASC')
+        sorted = dates.sort
+        sorted.reverse! if direction == 'DESC'
+        return sorted
+    end
+end
+
+class Date
+    @@KOREAN_YOEIL = %w[일 월 화 수 목 금 토]
+
+    # sunday = 0
+    def korean_yoeil
+        return @@KOREAN_YOEIL[self.wday]
+    end
 end

@@ -1,23 +1,127 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Name:</strong>
-  <%= @appointment.name %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @appointment.description %>
-</p>
-<p>
-  <strong>Start hour:</strong>
-  <%= @appointment.start_hour %>
-</p>
-<p>
-  <strong>End hour:</strong>
-  <%= @appointment.end_hour %>
-</p>
-<p>
-  <strong>Owner:</strong>
-  <%= @appointment.owner %>
-</p>
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
+<% @is_logged_in = is_logged_in %>
+<% participants = @appointment.get_participants %>
+<% participant_names = participants.map { |p| p.nickname }.join
+(", ") %>
+<div class="container flex flex-col p-8">
+  <section class="container flex flex-col">
+    <div class="flex flex-row text-xl font-bold"><%= @appointment.name %>
+    </div>
+  </section>
+  <section class="space-y-2 grid-cols-2">
+    <h1 class="text-lg font-bold">참여자 목록</h1>
+    <div class="participants-grid grid grid-cols-2 gap-2">
+      <% participants.each do |participant| %>
+        <div class="flex flex-row rounded-sm">
+          <img src="<%= participant.profile_image_url %>" alt="" width="24" height="24" class="rounded-full object-cover overflow-hidden flex items-center justify-center" style="width: 24px; height:24px;">
+          <span class="ml-2"><%= participant.nickname %></span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <%# Start Selector %>
+  <section>
+    <% @dates_hash.each do | keyval |%>
+      <% yearmonth, date_groups = keyval %>
+      <% date_groups.each_with_index do |date_group, date_group_index| %>
+        <% section_year, section_month = yearmonth.split(',') %>
+        <div><%= section_year %>년 <%= section_month %>월</div>
+        <%= date_group_index %>/<%= date_group %>/<%= date_group.length %>
+        <div class="flex flex-row availability-matrix hidden">
+          <% @sorted_dates.each do |date| %>
+            <div class="appointment-date flex flex-col">
+              <div class="appointment-date-header flex flex-col align-center justify-center">
+                <div class="day flex align-center justify-center text-xs font-light"><%= date.korean_yoeil %>요일</div>
+                <div class="date flex align-center justify-center text-2xl"><%= date.strftime("%d") %></div>
+              </div>
+              <% (@appointment.start_hour..@appointment.end_hour).each do |hour| %>
+                <div class="hour-slot">
+                  <div class="half-hour-slot selectable-nodes">
+                    <%= "%02d" % hour %>:00 - <%= "%02d" % hour %>:30
+                  </div>
+                  <div class="half-hour-slot selectable-nodes">
+                    <%= "%02d" % hour %>:30 - <%= "%02d" % (hour+1) %>:00
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+</div>
+<script>
+  var pressTimer;
+  $(".selectable-nodes").mouseup(function() {
+      console.log("mouseup!")
+    clearTimeout(pressTimer);
+    return false;
+  }).mousedown(function() {
+    pressTimer = window.setTimeout(() => {
+      console.log("mousedown!")
+    }, 400);
+    return false;
+  })
+</script>
+<style>
+  .selectable-nodes {
+    transition: all 0.1s ease;
+      color: rgba(0,0,0,0.2);
+      font-weight: light;
+
+  }
+    .selectable-nodes:focus {
+      background-color: rgba(0,0,0,0.1);
+      color: rgba(0,0,0,1);
+      font-weight: bold;
+    }
+    .availability-matrix {
+      overflow-x: scroll;
+      padding: 20px 0;
+    }
+
+    .availability-matrix * {
+      user-select:none;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .appointment-date {
+      min-width: 25vw;
+    }
+    .appointment-date-header {
+      height: 60px;
+    }
+    .hour-slot {
+      height: 50px;
+
+      display: flex;
+      flex-direction: column;
+      align-items:stretch;
+
+      border-top: 0.5px solid #ccc;
+
+      width: 100%;
+    }
+
+    .appointment-date:not(:last-child) .hour-slot {
+      border-right: 0.5px solid #ccc;
+    }
+    .half-hour-slot {
+      height: 25px;
+      width: 100%;
+
+      font-size: 12px;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      border-collapse: collapse;
+    }
+
+    .selection-container {
+      width: 100%;
+      /* height: 300px; */
+      overflow: scroll;
+    }
+</style>

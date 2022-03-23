@@ -1,4 +1,7 @@
+require_relative '../utils/date_pagination_group.rb'
+
 class AppointmentsController < ApplicationController
+    include ApplicationHelper
     before_action :set_appointment, only: %i[show edit update destroy]
 
     # GET /appointments or /appointments.json
@@ -7,7 +10,20 @@ class AppointmentsController < ApplicationController
     end
 
     # GET /appointments/1 or /appointments/1.json
-    def show; end
+    def show
+        @dates = @appointment.appointment_dates.map { |ad| ad.date }
+        @sorted_dates = sort_by_date(@dates, direction = 'ASC')
+        @dates_hash = DatePaginationGroup.new(@dates).get_hash
+        # @sorted_date_groups = {}
+        # @sorted_dates.each do |date|
+        #     date_group_key = "#{date.year},#{date.month}"
+        #     if @sorted_date_groups[date_group_key] == nil
+        #         @sorted_date_groups[date_group_key] = []
+        #     elsif @sorted_date_groups[date_group_key].length
+
+        #     end
+        # end
+    end
 
     # GET /appointments/new
     def new
