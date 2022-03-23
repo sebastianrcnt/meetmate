@@ -8,6 +8,8 @@ class User < ApplicationRecord
              inverse_of: :user,
              foreign_key: 'user_id'
 
+    validates_presence_of :kakao_user_id, :access_token, :nickname
+
     def get_my_appointments
         return Appointment.where(owner_id: self.id)
     end
@@ -18,5 +20,11 @@ class User < ApplicationRecord
                 appointment.get_participants_set.include? self
             end
         )
+    end
+
+    # http://www.chrisrolle.com/en/blog/activerecord-stringification
+
+    def name
+        return "#{self.nickname} (#{self.id})"
     end
 end

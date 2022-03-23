@@ -29,6 +29,7 @@ class Appointment < ApplicationRecord
     belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
     validates_presence_of :start_hour, message: '시작 시간은 필수입니다'
     validates_presence_of :end_hour, message: '종료 시간은 필수입니다.'
+    validates_presence_of :name, :description
     validates_with AppointmentHourRangeValidator
 
     def get_participants
